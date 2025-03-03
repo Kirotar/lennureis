@@ -8,4 +8,4 @@ CREATE TABLE flight_booking.flights
     arrival     TIMESTAMP,
     price       DECIMAL(10, 2),
     company     VARCHAR(50)
-)
+);
