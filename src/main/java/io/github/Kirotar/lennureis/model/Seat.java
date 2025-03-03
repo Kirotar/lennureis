@@ -25,8 +25,8 @@ public class Seat {
     @Column(name = "legroom")
     private Boolean legroom;
 
-    @Column(name = "window_type", length = 20)
-    private String windowType;
+    @Column(name = "seat_type", length = 20)
+    private String seatType;
 
     @Column(name = "exit_row")
     private Boolean exitRow;

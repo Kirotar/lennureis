@@ -4,7 +4,7 @@ CREATE TABLE flight_booking.seats
     flight_id BIGINT,
     seat_nr   VARCHAR(10),
     legroom   BOOLEAN,
-    window_type    VARCHAR(20),
+    seat_type    VARCHAR(20),
     exit_row      BOOLEAN,
     booked    BOOLEAN,
     FOREIGN KEY (flight_id) REFERENCES flight_booking.flights(flight_id)
