@@ -17,4 +17,22 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
+
+  //See on AI poolt, kuna ma pole varem monorepo struktuuriga projekti teinud
+  build: {
+    outDir: '../src/main/resources/static',
+    emptyOutDir: true
+  },
+
+  base: './',
+
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+        ws: true
+      }
+    }
+  }
 })
