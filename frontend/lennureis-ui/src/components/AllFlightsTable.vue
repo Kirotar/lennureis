@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import {useFlightStore} from "@/stores/flight";
+import {onMounted} from "vue";
 
 const store = useFlightStore();
-store.getFlights()
+onMounted(() => {
+  store.getFlights()
+})
 </script>
 
 <template>
