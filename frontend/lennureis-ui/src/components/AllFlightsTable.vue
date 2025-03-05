@@ -1,17 +1,20 @@
 <script setup lang="ts">
 import {useFlightStore} from "@/stores/flight";
-import {onMounted} from "vue";
+import {onMounted, ref} from "vue";
+
+const flightsTableIsVisible = ref(false);
 
 const store = useFlightStore();
+
 onMounted(() => {
   store.getFlights()
 })
 </script>
 
 <template>
-  <div v-for="flight in store.flights" :key="flight.id" class="flights-container">
-    <button  class="all-flights-button">Vaata kõiki lende!</button>
-    <table class="all-flights-table">
+  <div class="flights-container">
+    <button @click="flightsTableIsVisible=!flightsTableIsVisible" class="all-flights-button">Vaata kõiki lende!</button>
+    <table v-if="flightsTableIsVisible" class="all-flights-table">
       <thead class="table-header">
       <tr>
         <th class="table-header-cell">Alguspunkt</th>
@@ -23,13 +26,13 @@ onMounted(() => {
       </tr>
       </thead>
       <tbody>
-      <tr>
+      <tr v-for="flight in store.flights" :key="flight.id">
         <td class="table-data-cell">{{ flight.origin }}</td>
         <td class="table-data-cell">{{ flight.destination }}</td>
-        <td class="table-data-cell">{{flight.departure}}</td>
-        <td class="table-data-cell">{{flight.arrival}}</td>
-        <td class="table-data-cell">{{flight.price}}</td>
-        <td class="table-data-cell">{{flight.company}}</td>
+        <td class="table-data-cell">{{ flight.departure }}</td>
+        <td class="table-data-cell">{{ flight.arrival }}</td>
+        <td class="table-data-cell">{{ flight.price }}</td>
+        <td class="table-data-cell">{{ flight.company }}</td>
       </tr>
       </tbody>
     </table>
