@@ -1,10 +1,13 @@
 <script setup lang="ts">
+import {useFlightStore} from "@/stores/flight";
 
+const store = useFlightStore();
+store.getFlights()
 </script>
 
 <template>
-  <div class="flights-container">
-    <button class="all-flights-button">Vaata kõiki lende!</button>
+  <div v-for="flight in store.flights" :key="flight.id" class="flights-container">
+    <button  class="all-flights-button">Vaata kõiki lende!</button>
     <table class="all-flights-table">
       <thead class="table-header">
       <tr>
@@ -18,12 +21,15 @@
       </thead>
       <tbody>
       <tr>
-        <td class="table-data-cell"></td>
-        <td class="table-data-cell"></td>
-        <td class="table-data-cell"></td>
+        <td class="table-data-cell">{{ flight.origin }}</td>
+        <td class="table-data-cell">{{ flight.destination }}</td>
+        <td class="table-data-cell">{{flight.departure}}</td>
+        <td class="table-data-cell">{{flight.arrival}}</td>
+        <td class="table-data-cell">{{flight.price}}</td>
+        <td class="table-data-cell">{{flight.company}}</td>
       </tr>
       </tbody>
-      </table>
+    </table>
   </div>
 </template>
 

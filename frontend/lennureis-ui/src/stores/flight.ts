@@ -10,5 +10,8 @@ export const useFlightStore = defineStore('flight', () => {
     flights.value = await response.json();
   }
 
-  return(getFlights(), flights)
+  return{
+    flights,
+    getFlights
+  }
 })
