@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 
@@ -16,7 +15,7 @@ public interface FlightRepository extends JpaRepository<Flight, Integer> {
             "AND (:departure IS NULL OR f.departure = :departure) " +
             "AND (:arrival IS NULL OR f.arrival = :arrival) " +
             "AND (:company IS NULL OR f.company = :company) ")
-    List<Flight> findAvailableRoomsWithFilters(
+    List<Flight> findAvailableFlightsWithFilters(
             @Param("origin,") String origin,
             @Param("destination") String destination,
             @Param("departure") Instant departure,
