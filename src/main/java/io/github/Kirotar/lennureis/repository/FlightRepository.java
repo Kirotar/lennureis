@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface FlightRepository extends JpaRepository<Flight, Integer> {
 
-    @Query("SELECT f FROM Flights f WHERE (:origin IS NULL OR f.origin = :origin) " +
+    @Query("SELECT f FROM Flight f WHERE (:origin IS NULL OR f.origin = :origin) " +
             "AND (:destination IS NULL OR f.destination = :destination) " +
             "AND (:departure IS NULL OR f.departure = :departure) " +
             "AND (:arrival IS NULL OR f.arrival = :arrival) " +
@@ -21,7 +21,6 @@ public interface FlightRepository extends JpaRepository<Flight, Integer> {
             @Param("destination") String destination,
             @Param("departure") Instant departure,
             @Param("arrival,") Instant arrival,
-            @Param("price,") BigDecimal price,
             @Param("company,") String company
             );
 }
