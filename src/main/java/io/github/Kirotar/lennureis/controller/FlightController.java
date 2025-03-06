@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("lend")
+@RequestMapping("flight")
 public class FlightController {
 
     private final FlightService flightService;
@@ -20,12 +20,12 @@ public class FlightController {
         this.flightService = flightService;
     }
 
-@GetMapping("/lennud")
+@GetMapping("/flights")
     public List<Flight> getAllFlights(){
     return flightService.getAllFlights();
 }
 
-@GetMapping
+@GetMapping("/search")
     public List<Flight> getSearchedFlights(@ModelAttribute FlightSearch search){
         return flightService.searchFlights(search);
 }
