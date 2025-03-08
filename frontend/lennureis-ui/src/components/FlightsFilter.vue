@@ -4,30 +4,45 @@ import {ref} from "vue";
 
 const store = useFlightStore();
 
-const selectedOrigin = ref<string | null>(null);
-const selectedDestination = ref<string | null>(null);
-const selectedCompany = ref<string | null>(null);
+const selectedOrigin = ref<string>("");
+const selectedDestination = ref<string>("");
+const selectedCompany = ref<string>("");
+const departureDate = ref<string>("");
+const arrivalDate = ref<string>("");
+
+const handleSearch = () => {
+  store.searchFlights(
+      selectedOrigin.value,
+      selectedDestination.value,
+      departureDate.value,
+      arrivalDate.value,
+      selectedCompany.value
+  );
+};
 </script>
 
 <template>
   <div>
-    <form @submit.prevent="store.searchFlight">
+    <form @submit.prevent="handleSearch">
       <select v-model="selectedOrigin" name="origin">
+        <option value="">Select Origin</option>
         <option v-for="flight in store.flights" :key="flight.id" :value="flight.origin">
           {{ flight.origin }}
         </option>
       </select>
 
       <select v-model="selectedDestination" name="destination">
+        <option value="">Select Destination</option>
         <option v-for="flight in store.flights" :key="flight.id" :value="flight.destination">
           {{ flight.destination }}
         </option>
       </select>
 
-      <input type="date" id="departure" name="departure"><br><br>
-      <input type="date" id="arrival" name="arrival"><br><br>
+      <input v-model="departureDate" type="date" id="departure" name="departure"><br><br>
+      <input v-model="arrivalDate" type="date" id="arrival" name="arrival"><br><br>
 
       <select v-model="selectedCompany" name="company">
+        <option value="">Select Company</option>
         <option v-for="flight in store.flights" :key="flight.id" :value="flight.company">
           {{ flight.company }}
         </option>
