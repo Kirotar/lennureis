@@ -5,6 +5,8 @@ import io.github.Kirotar.lennureis.model.Flight;
 import io.github.Kirotar.lennureis.repository.FlightRepository;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,7 +22,7 @@ public class FlightService {
         return flightRepository.findAll();
     }
 
-    public List<Flight> searchFlights(FlightSearch search){
+    public List<Flight> searchFlights(FlightSearch search) {
         return flightRepository.findAvailableFlightsWithFilters(search.getOrigin(), search.getDestination(),
                 search.getDeparture(), search.getArrival(), search.getCompany());
     }
