@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.time.Instant;
 
 @Getter
 @Setter
@@ -25,10 +24,10 @@ public class Flight {
     private String destination;
 
     @Column(name = "departure")
-    private Instant departure;
+    private String departure;
 
     @Column(name = "arrival")
-    private Instant arrival;
+    private String arrival;
 
     @Column(name = "price", precision = 10, scale = 2)
     private BigDecimal price;
