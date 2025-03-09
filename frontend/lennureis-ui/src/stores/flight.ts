@@ -20,8 +20,27 @@ export const useFlightStore = defineStore('flight', () => {
     flights.value = await response.json();
   }
 
+  async function searchFlights( origin: string,
+                                destination: string,
+                                departure: string,
+                                arrival: string,
+                                company: string) {
+
+    const url = new URL(API_ENDPOINTS.FLIGHT_SEARCH, window.location.origin);
+
+    if (origin) url.searchParams.append('origin', origin);
+    if (destination) url.searchParams.append('destination', destination);
+    if (departure) url.searchParams.append('departure', departure);
+    if (arrival) url.searchParams.append('arrival', arrival);
+    if (company) url.searchParams.append('company', company);
+
+    const response = await fetch(url.toString());
+    flights.value = await response.json();
+  }
+
   return{
     flights,
-    getFlights
+    getFlights,
+    searchFlights
   }
 })
