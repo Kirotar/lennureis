@@ -38,10 +38,22 @@ export const useFlightStore = defineStore('flight', () => {
     flights.value = await response.json();
   }
 
-  async function getFlightById( id: string ) {
-    const response = await fetch(`${API_ENDPOINTS.FLIGHT_SEARCH_ID}/${id}`)
-    flights.value = await response.json();
+
+  //AI used to add error handling
+  async function getFlightById(id: number): Promise<Flight | null> {
+    try {
+      const response = await fetch(`${API_ENDPOINTS.FLIGHT_SEARCH_ID}/${id}`);
+      if (!response.ok) {
+        console.error('Failed to fetch flight. Status:', response.status);
+        return null;
+      }
+      return await response.json() as Flight;
+    } catch (error) {
+      console.error('Error fetching flight:', error);
+      return null;
+    }
   }
+
 
   return{
     flights,
