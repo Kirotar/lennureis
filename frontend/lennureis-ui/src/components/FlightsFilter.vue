@@ -4,6 +4,8 @@ import {ref} from "vue";
 
 const store = useFlightStore();
 
+const passengerCount = ref<string>("1");
+
 const selectedOrigin = ref<string>("");
 const selectedDestination = ref<string>("");
 const selectedCompany = ref<string>("");
@@ -19,6 +21,7 @@ const handleSearch = () => {
       selectedCompany.value
   );
 };
+
 </script>
 
 <template>
@@ -62,6 +65,7 @@ const handleSearch = () => {
         <th class="table-header-cell">Saabumisaeg</th>
         <th class="table-header-cell">Hind</th>
         <th class="table-header-cell">Teenusepakkuja</th>
+        <th class="table-header-cell"></th>
       </tr>
       </thead>
       <tbody>
@@ -72,7 +76,23 @@ const handleSearch = () => {
         <td class="table-data-cell">{{ flight.arrival }}</td>
         <td class="table-data-cell">{{ flight.price }}</td>
         <td class="table-data-cell">{{ flight.company }}</td>
-      </tr>
+        <td class="table-data-cell" data-label="Action">
+          <label for="passengers">Vali reisjate arv:</label>
+
+          <select v-model="passengerCount" id="passengers">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <router-link
+              :to="`/seats?flightId=${flight.id}&passengers=${passengerCount}`"
+              class="make-booking-button"
+          >
+            Make a reservation
+          </router-link>
+        </td>      </tr>
       </tbody>
     </table>
   </div>
