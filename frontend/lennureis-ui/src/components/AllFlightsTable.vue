@@ -2,7 +2,9 @@
 import {useFlightStore} from "@/stores/flight";
 import {onMounted, ref} from "vue";
 
+/*
 const flightsTableIsVisible = ref(false);
+*/
 
 const store = useFlightStore();
 
@@ -13,8 +15,7 @@ onMounted(() => {
 
 <template>
   <div class="flights-container">
-    <button @click="flightsTableIsVisible=!flightsTableIsVisible" class="all-flights-button">Vaata kõiki lende!</button>
-    <table v-if="flightsTableIsVisible" class="all-flights-table">
+    <table class="all-flights-table">
       <thead class="table-header">
       <tr>
         <th class="table-header-cell">Alguspunkt</th>

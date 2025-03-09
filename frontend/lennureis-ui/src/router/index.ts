@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import {createRouter, createWebHistory} from 'vue-router'
 import HomeView from '../views/FlightsView.vue'
 import FlightsView from "@/views/FlightsView.vue";
 
@@ -17,6 +17,11 @@ const router = createRouter({
       // this generates a separate chunk for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/SeatsView.vue'),
+    },
+    {
+      path: '/all_flights',
+      name: 'all_flights',
+      component: () => import('../views/AllFlightsView.vue'),
     },
   ],
 })
