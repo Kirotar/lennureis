@@ -2,7 +2,7 @@ import {ref} from 'vue'
 import {defineStore} from 'pinia'
 import {API_ENDPOINTS} from "@/config.ts";
 
-interface Flight {
+export interface Flight {
   id: number;
   origin: string;
   destination: string;
@@ -38,9 +38,15 @@ export const useFlightStore = defineStore('flight', () => {
     flights.value = await response.json();
   }
 
+  async function getFlightById( id: string ) {
+    const response = await fetch(`${API_ENDPOINTS.FLIGHT_SEARCH_ID}/${id}`)
+    flights.value = await response.json();
+  }
+
   return{
     flights,
     getFlights,
-    searchFlights
+    searchFlights,
+    getFlightById,
   }
 })
