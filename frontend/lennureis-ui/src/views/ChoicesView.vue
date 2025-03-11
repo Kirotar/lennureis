@@ -1,15 +1,32 @@
 <script setup lang="ts">
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import {useRoute} from "vue-router";
+import {type Flight, useFlightStore} from "@/stores/flight.ts";
+
+const store = useFlightStore();
+const route = useRoute();
+
+const flightId = Number(route.query.flightId);
 
 const passengerCount = ref<string>("1");
 const seatType = ref<string>("");
 
-const route = useRoute();
-const flightId = ref(route.query.flightId as string);
+const flight = ref<Flight | null>(null);
+
+onMounted(async () => {
+  flight.value = await store.getFlightById(flightId);
+});
 </script>
 
 <template>
+  <div v-if="flight" class="flight-details">
+    <h3>Sinu lend:</h3>
+    <p>Alguspunkt - Sihtkoht: {{ flight.origin }} - {{ flight.destination }}</p>
+    <p>Kestvus: {{ flight.departure }} - {{ flight.arrival }}</p>
+    <p>Teenusepakkuja: {{ flight.company }}</p>
+    <p>Hind: {{ flight.price }}</p>
+  </div>
+
   <div class="seat-choices-container">
     <label for="passengers">Vali reisjate arv:</label>
 
