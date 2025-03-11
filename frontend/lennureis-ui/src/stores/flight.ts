@@ -54,13 +54,13 @@ export const useFlightStore = defineStore('flight', () => {
     }
   }
 
-async function getAssignedSeats(id: number, legroom: boolean, seatType: string, exitRow: boolean, nrOfPassengers: number) {
+async function getAssignedSeats(flightId: number, legroom: boolean, seatType: string, exitRow: boolean, nrOfPassengers: number) {
   const url = new URL(API_ENDPOINTS.FLIGHT_ASSIGNED_SEATS, window.location.origin);
-  if (id) url.searchParams.append('id', id.toString());
+  url.searchParams.append('flightId', flightId.toString());
   if (legroom) url.searchParams.append('legroom', legroom.toString());
   if (seatType) url.searchParams.append('seatType', seatType.toString());
   if (exitRow) url.searchParams.append('exitRow', exitRow.toString());
-  if (nrOfPassengers) url.searchParams.append('nrOfPassengers', nrOfPassengers.toString());
+  url.searchParams.append('nrOfPassengers', nrOfPassengers.toString());
 
   const response = await fetch(url.toString());
   return await response.json();
