@@ -8,6 +8,7 @@ import { RouterLink, RouterView } from 'vue-router'
       <nav>
         <RouterLink to="/">Lennud</RouterLink>
         <RouterLink to="/all_flights">Kõik marsruudid</RouterLink>
+        <RouterLink to="/choices">Valikud</RouterLink>
         <RouterLink to="/seats">Vali iste</RouterLink>
       </nav>
     </div>
