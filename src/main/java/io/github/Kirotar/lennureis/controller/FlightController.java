@@ -17,18 +17,18 @@ public class FlightController {
         this.flightService = flightService;
     }
 
-@GetMapping("/flights")
-    public List<Flight> getAllFlights(){
-    return flightService.getAllFlights();
-}
+    @GetMapping("/flights")
+    public List<Flight> getAllFlights() {
+        return flightService.getAllFlights();
+    }
 
-@GetMapping("/search")
-    public List<Flight> getSearchedFlights(@ModelAttribute FlightSearch search){
+    @GetMapping("/search")
+    public List<Flight> getSearchedFlights(@ModelAttribute FlightSearch search) {
         return flightService.searchFlights(search);
-}
+    }
 
     @GetMapping("/search_by_id/{id}")
-    public Flight searchFlightById(@PathVariable ("id") int id){
+    public Flight searchFlightById(@PathVariable("id") int id) {
         return flightService.searchFlightById(id);
     }
 }
