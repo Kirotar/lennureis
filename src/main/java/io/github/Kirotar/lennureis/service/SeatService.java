@@ -2,10 +2,8 @@ package io.github.Kirotar.lennureis.service;
 
 import io.github.Kirotar.lennureis.model.Seat;
 import io.github.Kirotar.lennureis.repository.SeatRepository;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,5 +25,11 @@ public class SeatService {
     seatRepository.saveAll(takenSeats);
     }
 
+
+    public List<String> assignSeats(int id) {
+    List<String> assignedSeats = seatRepository.reccommendSeatIds(
+
+    )
+    }
 
 }

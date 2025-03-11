@@ -20,7 +20,7 @@ public class SeatController {
     }
 
     @GetMapping("/assign-seats/{id}")
-    public List<Seat> assignSeats(@PathVariable("id") int id) {
+    public List<String> assignSeats(@PathVariable("id") int id) {
         return seatService.assignSeats(id);
     }
 }
