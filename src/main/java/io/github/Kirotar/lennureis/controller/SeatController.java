@@ -1,11 +1,9 @@
 package io.github.Kirotar.lennureis.controller;
 
+import io.github.Kirotar.lennureis.dto.SeatsRequest;
 import io.github.Kirotar.lennureis.model.Seat;
 import io.github.Kirotar.lennureis.service.SeatService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,8 +17,8 @@ public class SeatController {
         this.seatService = seatService;
     }
 
-    @GetMapping("/assign-seats/{id}")
-    public List<String> assignSeats(@PathVariable("id") int id) {
-        return seatService.assignSeats(id);
+    @GetMapping("/assign-seats")
+    public List<String> assignSeats(@ModelAttribute SeatsRequest seat) {
+        return seatService.assignSeats(seat);
     }
 }
