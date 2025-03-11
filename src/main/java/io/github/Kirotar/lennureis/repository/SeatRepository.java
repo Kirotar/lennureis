@@ -10,10 +10,10 @@ import java.util.List;
 public interface SeatRepository extends JpaRepository<Seat, Integer> {
 
     @Query("SELECT s FROM Seat s WHERE " +
-            "s.flight = :flightId " +
+            "s.flight.id = :flightId " +
             "AND (:legroom IS NULL OR s.legroom = :legroom) " +
-            "AND (:seatType IS NULL OR s.seatType = :seatType) " +
-            "AND (:exitRow IS NULL OR s.exitRow = :exitRow) " +
+            "AND (:seatType IS NULL OR :seatType = '' OR s.seatType = :seatType) " +
+            "AND (:exitRow IS NULL OR s.exitRow = :exitRow) "+
             "AND s.booked = false ")
     List<Seat> reccommendSeatIds(
             @Param("flightId") int flightId,
