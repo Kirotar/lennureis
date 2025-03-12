@@ -25,6 +25,7 @@ export interface Seats {
 export const useFlightStore = defineStore('flight', () => {
   const flights = ref<Flight[]>([])
   const seats = ref<Seats[]>([])
+  const assignedSeats = ref<string[]>([])
 
   async function getFlights() {
     const response = await fetch(API_ENDPOINTS.FLIGHT_INFO)
@@ -79,13 +80,18 @@ export const useFlightStore = defineStore('flight', () => {
     url.searchParams.append('nrOfPassengers', nrOfPassengers.toString());
 
     const response = await fetch(url.toString());
-    return await response.json();
+    assignedSeats.value = await response.json();
+    return assignedSeats.value;
   }
 
   return {
     flights,
+    seats,
+    assignedSeats,
     getFlights,
     searchFlights,
     getFlightById,
+    getAssignedSeats,
+    getSeats,
   }
 })
