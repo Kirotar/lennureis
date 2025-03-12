@@ -10,6 +10,8 @@ const store = useFlightStore();
 
 const passengerCount = ref<string>("1");
 const seatType = ref<string>("");
+const legroom = ref<boolean>(false);
+const exitRow = ref<boolean>(false);
 
 const flight = ref<Flight | null>(null);
 
@@ -46,16 +48,17 @@ onMounted(async () => {
       <option value="aisle">Vahekäigu ääres</option>
     </select>
 
-    <input type="checkbox" id="legroom" name="legroom" value="legroom">
+    <input v-model="legroom" type="checkbox" id="legroom" name="legroom" value="legroom">
     <label for="legroom"> Soovin rohkem jalaruumi</label><br>
 
-    <input type="checkbox" id="exit" name="exit" value="exit">
+    <input v-model="exitRow" type="checkbox" id="exitRow" name="exitRow" value="exitRow">
     <label for="exit"> Soovin olla lähedal väljapääsule</label><br>
 
 
     <router-link
       :to="`/seats`"
       class="choose-seating-button"
+      @click="store.getAssignedSeats(props.flightId, legroom, seatType, exitRow, parseInt(passengerCount))"
     >
       Vaata istmekohti
     </router-link>
