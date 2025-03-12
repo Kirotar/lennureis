@@ -12,19 +12,30 @@ export interface Flight {
   company: string;
 }
 
+export interface Seats {
+  id: number;
+  flightId: number;
+  seatNr: string;
+  legroom: boolean;
+  seatType: string;
+  exitRow: boolean;
+  booker: boolean;
+}
+
 export const useFlightStore = defineStore('flight', () => {
   const flights = ref<Flight[]>([])
+  const seats = ref<Seats[]>([])
 
   async function getFlights() {
     const response = await fetch(API_ENDPOINTS.FLIGHT_INFO)
     flights.value = await response.json();
   }
 
-  async function searchFlights( origin: string,
-                                destination: string,
-                                departure: string,
-                                arrival: string,
-                                company: string) {
+  async function searchFlights(origin: string,
+                               destination: string,
+                               departure: string,
+                               arrival: string,
+                               company: string) {
 
     const url = new URL(API_ENDPOINTS.FLIGHT_SEARCH, window.location.origin);
 
@@ -54,19 +65,24 @@ export const useFlightStore = defineStore('flight', () => {
     }
   }
 
-async function getAssignedSeats(flightId: number, legroom: boolean, seatType: string, exitRow: boolean, nrOfPassengers: number) {
-  const url = new URL(API_ENDPOINTS.FLIGHT_ASSIGNED_SEATS, window.location.origin);
-  url.searchParams.append('flightId', flightId.toString());
-  if (legroom) url.searchParams.append('legroom', legroom.toString());
-  if (seatType) url.searchParams.append('seatType', seatType.toString());
-  if (exitRow) url.searchParams.append('exitRow', exitRow.toString());
-  url.searchParams.append('nrOfPassengers', nrOfPassengers.toString());
+  async function getSeats(id: number) {
+    const response = await fetch(API_ENDPOINTS.FLIGHT_GET_SEATS)
+    seats.value = await response.json();
+  }
 
-  const response = await fetch(url.toString());
-  return await response.json();
-}
+  async function getAssignedSeats(flightId: number, legroom: boolean, seatType: string, exitRow: boolean, nrOfPassengers: number) {
+    const url = new URL(API_ENDPOINTS.FLIGHT_ASSIGNED_SEATS, window.location.origin);
+    url.searchParams.append('flightId', flightId.toString());
+    if (legroom) url.searchParams.append('legroom', legroom.toString());
+    if (seatType) url.searchParams.append('seatType', seatType.toString());
+    if (exitRow) url.searchParams.append('exitRow', exitRow.toString());
+    url.searchParams.append('nrOfPassengers', nrOfPassengers.toString());
 
-  return{
+    const response = await fetch(url.toString());
+    return await response.json();
+  }
+
+  return {
     flights,
     getFlights,
     searchFlights,

@@ -5,4 +5,5 @@ export const API_ENDPOINTS = {
   FLIGHT_SEARCH: `${API_BASE_URL}/search`,
   FLIGHT_SEARCH_ID: `${API_BASE_URL}/search_by_id`,
   FLIGHT_ASSIGNED_SEATS: `${API_BASE_URL}/assign_seats`,
+  FLIGHT_GET_SEATS: `${API_BASE_URL}/get-all-seats`,
 };
