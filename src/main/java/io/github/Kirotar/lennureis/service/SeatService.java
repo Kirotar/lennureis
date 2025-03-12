@@ -5,6 +5,7 @@ import io.github.Kirotar.lennureis.model.Seat;
 import io.github.Kirotar.lennureis.repository.SeatRepository;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +18,12 @@ public class SeatService {
         this.seatRepository = seatRepository;
     }
 
-    public void assignRandomTakenSeats() {
-        List<Seat> takenSeats = seatRepository.findAll();
+    public List<Seat> getAllSeatsForFlight(int id) {
+    return seatRepository.findAllByFlightId(id);
+    }
+
+    public void assignRandomTakenSeats(int id) {
+        List<Seat> takenSeats = getAllSeatsForFlight(id);
 
         takenSeats.forEach(seat -> {
             boolean randomStatus = Math.random() < 0.5;
@@ -30,7 +35,7 @@ public class SeatService {
 
 
     public List<String> assignSeats(SeatsRequest request) {
-        assignRandomTakenSeats();
+        assignRandomTakenSeats(request.getFlightId());
         List<Seat> reccommendedSeats = seatRepository.reccommendSeatIds(request.getFlightId(), request.getLegroom(), request.getSeatType(), request.getExitRow()
         );
         List<String> assignedSeats = new ArrayList<>();

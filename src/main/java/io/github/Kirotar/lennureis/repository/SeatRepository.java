@@ -21,4 +21,9 @@ public interface SeatRepository extends JpaRepository<Seat, Integer> {
             @Param("seatType") String seatType,
             @Param("exitRow") Boolean exitRow
     );
+
+    @Query("SELECT s FROM Seat s WHERE s.flight.id = :flightId ")
+    List <Seat> findAllByFlightId(
+            Integer flightId
+    );
 }

@@ -17,8 +17,14 @@ public class SeatController {
         this.seatService = seatService;
     }
 
+    @GetMapping("/get-all-seats/{id}")
+    public List<Seat> getAllSeatsForFlight(@PathVariable("id") int id) {
+         return seatService.getAllSeatsForFlight(id);
+    }
+
     @GetMapping("/assign-seats")
     public List<String> assignSeats(@ModelAttribute SeatsRequest seat) {
         return seatService.assignSeats(seat);
     }
+
 }
