@@ -15,11 +15,12 @@ export interface Flight {
 export interface Seats {
   id: number;
   flightId: number;
-  seatNr: string;
+  seatColumn: string;
+  seatRow: number;
   legroom: boolean;
   seatType: string;
   exitRow: boolean;
-  booker: boolean;
+  booked: boolean;
 }
 
 export const useFlightStore = defineStore('flight', () => {
@@ -67,8 +68,9 @@ export const useFlightStore = defineStore('flight', () => {
   }
 
   async function getSeats(id: number) {
-    const response = await fetch(API_ENDPOINTS.FLIGHT_GET_SEATS)
-    seats.value = await response.json();
+    const response = await fetch(`${API_ENDPOINTS.FLIGHT_GET_SEATS}/${id}`);
+    const data = await response.json();
+    seats.value = data;
   }
 
   async function getAssignedSeats(flightId: number, legroom: boolean, seatType: string, exitRow: boolean, nrOfPassengers: number) {
