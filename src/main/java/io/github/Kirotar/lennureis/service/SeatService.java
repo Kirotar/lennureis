@@ -39,6 +39,7 @@ public class SeatService {
         dto.setLegroom(seat.getLegroom());
         dto.setSeatType(seat.getSeatType());
         dto.setExitRow(seat.getExitRow());
+        dto.setBooked(seat.getBooked());
         dto.setNrOfPassengers(0);
         return dto;
     }

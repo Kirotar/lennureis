@@ -14,4 +14,5 @@ public class SeatsRequest {
     private String seatType;
     private Boolean exitRow;
     private int nrOfPassengers;
+    private boolean booked;
 }
