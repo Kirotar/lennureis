@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SeatService {
@@ -18,12 +19,28 @@ public class SeatService {
         this.seatRepository = seatRepository;
     }
 
-    public List<Seat> getAllSeatsForFlight(int id) {
-    return seatRepository.findAllByFlightId(id);
+    public List<Seat> getAllSeatsForFlightFromSeats(int id) {
+        return seatRepository.findAllByFlightId(id);
+    }
+
+    public List<SeatsRequest> getAllSeatsForFlight(int id) {
+        List<Seat> seats = seatRepository.findAllByFlightId(id);
+        List<SeatsRequest> seatDTOs = seats.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+        return seatDTOs;
+    }
+
+    private SeatsRequest convertToDTO(Seat seat) {
+        SeatsRequest dto = new SeatsRequest();
+        dto.setSeatColumn(seat.getSeatColumn());
+        dto.setSeatColumn(seat.getSeatColumn());
+        dto.setFlightId(seat.getFlight().getId());
+        return dto;
     }
 
     public void assignRandomTakenSeats(int id) {
-        List<Seat> takenSeats = getAllSeatsForFlight(id);
+        List<Seat> takenSeats = getAllSeatsForFlightFromSeats(id);
 
         takenSeats.forEach(seat -> {
             boolean randomStatus = Math.random() < 0.5;
@@ -36,15 +53,16 @@ public class SeatService {
 
     public List<String> assignSeats(SeatsRequest request) {
         assignRandomTakenSeats(request.getFlightId());
-        List<Seat> reccommendedSeats = seatRepository.reccommendSeatIds(request.getFlightId(), request.getLegroom(), request.getSeatType(), request.getExitRow()
+        List<Seat> recommendedSeats = seatRepository.reccommendSeatIds(request.getFlightId(), request.getLegroom(), request.getSeatType(), request.getExitRow()
         );
         List<String> assignedSeats = new ArrayList<>();
         int passengersToAssign = request.getNrOfPassengers();
-        for (Seat seat : reccommendedSeats) {
+        for (Seat seat : recommendedSeats) {
             if (passengersToAssign == 0) {
                 break;
             }
-            assignedSeats.add(seat.getSeatNr());
+            String seatIdentifier = String.valueOf(seat.getSeatRow()) + seat.getSeatColumn();
+            assignedSeats.add(seatIdentifier);
             passengersToAssign--;
         }
         return assignedSeats;

@@ -19,8 +19,11 @@ public class Seat {
     @JoinColumn(name = "flight_id")
     private Flight flight;
 
-    @Column(name = "seat_nr", length = 10)
-    private String seatNr;
+    @Column(name = "seat_column")
+    private Character seatColumn;
+
+    @Column(name = "seat_row")
+    private Integer seatRow;
 
     @Column(name = "legroom")
     private Boolean legroom;
