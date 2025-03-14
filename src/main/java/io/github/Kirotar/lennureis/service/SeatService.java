@@ -33,9 +33,13 @@ public class SeatService {
 
     private SeatsRequest convertToDTO(Seat seat) {
         SeatsRequest dto = new SeatsRequest();
-        dto.setSeatColumn(seat.getSeatColumn());
-        dto.setSeatColumn(seat.getSeatColumn());
         dto.setFlightId(seat.getFlight().getId());
+        dto.setSeatColumn(seat.getSeatColumn());
+        dto.setSeatRow(seat.getSeatRow());
+        dto.setLegroom(seat.getLegroom());
+        dto.setSeatType(seat.getSeatType());
+        dto.setExitRow(seat.getExitRow());
+        dto.setNrOfPassengers(0);
         return dto;
     }
 
