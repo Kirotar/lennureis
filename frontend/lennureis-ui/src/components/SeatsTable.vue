@@ -1,29 +1,29 @@
 <script setup lang="ts">
-/*import {useFlightStore} from "@/stores/flight.ts";
+import {type Seats, useFlightStore} from "@/stores/flight.ts";
 import {ref, onMounted} from "vue";
-import {useRoute} from "vue-router";
 import type { Flight } from "@/stores/flight.ts";
 
-const route = useRoute();
+const props = defineProps<{
+  flightId: number
+  passengerCount: number
+}>();
 const store = useFlightStore();
 
-const flightId = route.query.flightId as string;
-const passengers = route.query.passengers as string;
-
-const flight = ref<Flight | null>(null);*/
+const flight = ref<Flight | null>(null);
+const seats = ref<Seats | null>(null);
 
 
 </script>
 
 <template>
-<!--  <div v-if="flight" class="flight-details">
-    <h3>Reservation Details</h3>
-    <p>From - To: {{ flight.origin }} - {{ flight.destination }}</p>
-    <p>Duration: {{ flight.departure }} - {{ flight.arrival }}</p>
-    <p>Company: {{ flight.company }}</p>
-    <p>Price: {{ flight.price }}</p>
-    <p>Number of passengers: {{ passengers }} </p>
-  </div>-->
+  <!--  <div v-if="flight" class="flight-details">
+      <h3>Reservation Details</h3>
+      <p>From - To: {{ flight.origin }} - {{ flight.destination }}</p>
+      <p>Duration: {{ flight.departure }} - {{ flight.arrival }}</p>
+      <p>Company: {{ flight.company }}</p>
+      <p>Price: {{ flight.price }}</p>
+      <p>Number of passengers: {{ passengers }} </p>
+    </div>-->
 
   <div class="plane-seats-container">
     <table>
@@ -37,13 +37,14 @@ const flight = ref<Flight | null>(null);*/
         <th>E</th>
         <th>F</th>
       </tr>
-        </thead>
+      </thead>
       <tbody>
-      <tr>
+      <tr v-for="seat in store.seats" :key="seat.id">
+
+      <td><button>O</button></td>
         <td><button>O</button></td>
         <td><button>O</button></td>
-        <td><button>O</button></td>
-        <td>1</td>
+          <td>{{ seat.seatRow }}</td>
         <td><button>O</button></td>
         <td><button>O</button></td>
         <td><button>O</button></td>
