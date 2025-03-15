@@ -8,6 +8,8 @@ const props = defineProps<{
 }>();
 const store = useFlightStore();
 
+const selectedSeats = ref<string[]>(store.assignedSeats);
+
 const groupedSeats = computed<GroupedRow[]>(() => {
   const grouped: Record<number, Record<string, Seats>> = {};
 
@@ -24,13 +26,15 @@ const groupedSeats = computed<GroupedRow[]>(() => {
   }));
 });
 
-function isBooked(seat: any){
+function isBooked(seat: any) {
   return seat && seat.booked === true;
 
 }
-/*
-function isSelected{}
-*/
+
+function isSelected(seatRow: number, seatColumn: string) {
+  const seatId = `${seatColumn}${seatRow}`;
+  selectedSeats.value.includes(seatId);
+}
 
 onMounted(async () => {
   await store.getFlightById(props.flightId);
@@ -48,8 +52,8 @@ onMounted(async () => {
       <p>Number of passengers: {{ passengers }} </p>
     </div>-->
 
-  <p>Sinu istmed: {{store.assignedSeats}}</p>
-  <p>Reisjate arv: {{passengerCount}}</p>
+  <p>Sinu istmed: {{ store.assignedSeats }}</p>
+  <p>Reisjate arv: {{ passengerCount }}</p>
   <div class="plane-seats-container">
     <table>
       <thead>
@@ -68,8 +72,10 @@ onMounted(async () => {
         <td v-for="letter in ['A', 'B', 'C']" :key="letter">
           <button v-if="letter"
                   :disabled="isBooked(row[letter])"
-                  :class="{'booked': isBooked(row[letter])}">
-            {{letter}} {{row.rowNumber}}
+                  :class="{'booked': isBooked(row[letter]),
+                                  'selected': isSelected(row.rowNumber, letter),
+}">
+            {{ letter }} {{ row.rowNumber }}
           </button>
         </td>
         <td> {{ row.rowNumber }}
@@ -77,9 +83,11 @@ onMounted(async () => {
         <td v-for="letter in ['D', 'E', 'F']" :key="letter">
           <button v-if="letter"
                   :disabled="isBooked(row[letter])"
-                  :class="{'booked': isBooked(row[letter])}"
+                  :class="{'booked': isBooked(row[letter]),
+                                  'selected': isSelected(row.rowNumber, letter),
+}"
           >
-            {{letter}} {{row.rowNumber}}
+            {{ letter }} {{ row.rowNumber }}
           </button>
         </td>
       </tr>
