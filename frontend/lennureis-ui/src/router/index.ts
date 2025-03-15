@@ -19,12 +19,6 @@ const router = createRouter({
       component: () => import('../views/SeatsView.vue'),
     },
     {
-      path: '/all_flights',
-      name: 'all_flights',
-      component: () => import('../views/AllFlightsView.vue'),
-    },
-
-    {
       path: '/choices',
       name: 'choices',
       component: () => import('../views/ChoicesView.vue'),
