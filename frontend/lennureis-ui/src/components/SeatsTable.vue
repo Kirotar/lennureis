@@ -40,6 +40,8 @@ onMounted(async () => {
       <p>Number of passengers: {{ passengers }} </p>
     </div>-->
 
+  <p>Sinu istmed: {{store.assignedSeats}}</p>
+  <p>Reisjate arv: {{passengerCount}}</p>
   <div class="plane-seats-container">
     <table>
       <thead>
