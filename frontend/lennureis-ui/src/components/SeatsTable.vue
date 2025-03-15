@@ -24,6 +24,14 @@ const groupedSeats = computed<GroupedRow[]>(() => {
   }));
 });
 
+function isBooked(seat: any){
+  return seat && seat.booked === true;
+
+}
+/*
+function isSelected{}
+*/
+
 onMounted(async () => {
   await store.getFlightById(props.flightId);
   await store.getSeats(props.flightId);
@@ -58,14 +66,19 @@ onMounted(async () => {
       <tbody>
       <tr v-for="row in groupedSeats" :key="row.rowNumber">
         <td v-for="letter in ['A', 'B', 'C']" :key="letter">
-          <button v-if="letter">
+          <button v-if="letter"
+                  :disabled="isBooked(row[letter])"
+                  :class="{'booked': isBooked(row[letter])}">
             {{letter}} {{row.rowNumber}}
           </button>
         </td>
         <td> {{ row.rowNumber }}
         </td>
         <td v-for="letter in ['D', 'E', 'F']" :key="letter">
-          <button v-if="letter">
+          <button v-if="letter"
+                  :disabled="isBooked(row[letter])"
+                  :class="{'booked': isBooked(row[letter])}"
+          >
             {{letter}} {{row.rowNumber}}
           </button>
         </td>
