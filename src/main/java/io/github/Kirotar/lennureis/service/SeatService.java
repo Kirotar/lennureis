@@ -48,7 +48,7 @@ public class SeatService {
         List<Seat> takenSeats = getAllSeatsForFlightFromSeats(id);
 
         takenSeats.forEach(seat -> {
-            boolean randomStatus = Math.random() < 0.5;
+            boolean randomStatus = Math.random() < 0.3;
             seat.setBooked(randomStatus);
         });
 
