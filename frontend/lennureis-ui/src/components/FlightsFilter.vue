@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import {useFlightStore} from "@/stores/flight";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 
 const store = useFlightStore();
 
+const isVisible = ref<boolean>(false);
 
 const selectedOrigin = ref<string>("");
 const selectedDestination = ref<string>("");
@@ -21,11 +22,24 @@ const handleSearch = () => {
   );
 };
 
+const resetFilters = () => {
+  selectedOrigin.value = "";
+  selectedDestination.value = "";
+  selectedCompany.value = "";
+  departureDate.value = "";
+  arrivalDate.value = "";
+  store.resetSearch();
+};
+
+onMounted(() => {
+  store.getFlights()
+})
 </script>
 
 <template>
-  <div>
-    <form @submit.prevent="handleSearch">
+  <div >
+    <button @click="isVisible = !isVisible">Otsi lende</button>
+    <form v-if="isVisible" @submit.prevent="handleSearch">
       <select v-model="selectedOrigin" name="origin">
         <option value="">Select Origin</option>
         <option v-for="flight in store.flights" :key="flight.id" :value="flight.origin">
@@ -50,7 +64,8 @@ const handleSearch = () => {
         </option>
       </select>
 
-      <input type="submit" value="Submit">
+      <input type="submit" value="Otsi">
+      <button type="button" @click="resetFilters">Tühjenda väljad</button>
     </form>
   </div>
 
@@ -68,7 +83,7 @@ const handleSearch = () => {
       </tr>
       </thead>
       <tbody>
-      <tr v-for="flight in store.flights" :key="flight.id">
+      <tr v-for="flight in store.filteredFlights" :key="flight.id">
         <td class="table-data-cell">{{ flight.origin }}</td>
         <td class="table-data-cell">{{ flight.destination }}</td>
         <td class="table-data-cell">{{ flight.departure }}</td>

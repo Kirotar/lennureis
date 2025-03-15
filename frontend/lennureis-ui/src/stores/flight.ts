@@ -30,6 +30,7 @@ export interface GroupedRow {
 
 export const useFlightStore = defineStore('flight', () => {
   const flights = ref<Flight[]>([])
+  const filteredFlights = ref<Flight[]>([])
   const seats = ref<Seats[]>([])
   const assignedSeats = ref<string[]>([])
   const groupedRow = ref<GroupedRow[]>([])
@@ -37,6 +38,7 @@ export const useFlightStore = defineStore('flight', () => {
   async function getFlights() {
     const response = await fetch(API_ENDPOINTS.FLIGHT_INFO)
     flights.value = await response.json();
+    resetSearch();
   }
 
   async function searchFlights(origin: string,
@@ -54,9 +56,12 @@ export const useFlightStore = defineStore('flight', () => {
     if (company) url.searchParams.append('company', company);
 
     const response = await fetch(url.toString());
-    flights.value = await response.json();
+    filteredFlights.value = await response.json();
   }
 
+  function resetSearch() {
+    filteredFlights.value = [...flights.value];
+  }
 
   //AI used to add error handling
   async function getFlightById(id: number): Promise<Flight | null> {
@@ -94,6 +99,7 @@ export const useFlightStore = defineStore('flight', () => {
 
   return {
     flights,
+    filteredFlights,
     seats,
     assignedSeats,
     groupedRow,
@@ -102,5 +108,6 @@ export const useFlightStore = defineStore('flight', () => {
     getFlightById,
     getAssignedSeats,
     getSeats,
+    resetSearch,
   }
 })
