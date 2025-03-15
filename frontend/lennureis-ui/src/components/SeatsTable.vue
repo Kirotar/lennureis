@@ -37,10 +37,16 @@ function isSelected(seatRow: number, seatColumn: string) {
 
 function selectSeat(seatRow: number, seatColumn: string) {
   const seatId = `${seatRow}${seatColumn}`;
-  if(selectedSeats.value.length < props.passengerCount){
-  return selectedSeats.value.push(seatId);
+  const alreadySelected = selectedSeats.value.indexOf(seatId);
+
+  if (alreadySelected !== -1) {
+    return selectedSeats.value.splice(alreadySelected, 1)
   } else {
-    alert("Uue istme valimiseks tühista eelnev iste.")
+    if (selectedSeats.value.length < props.passengerCount) {
+      return selectedSeats.value.push(seatId);
+    } else {
+      alert("Uue istme valimiseks tühista eelnev iste.")
+    }
   }
 }
 
