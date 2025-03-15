@@ -60,22 +60,12 @@ onMounted(async () => {
             {{letter}} {{row.rowNumber}}
           </button>
         </td>
-        <td>
-          <button>O</button>
-        </td>
-        <td>
-          <button>O</button>
-        </td>
         <td> {{ row.rowNumber }}
         </td>
-        <td>
-          <button>O</button>
-        </td>
-        <td>
-          <button>O</button>
-        </td>
-        <td>
-          <button>O</button>
+        <td v-for="letter in ['D', 'E', 'F']" :key="letter">
+          <button v-if="letter">
+            {{letter}} {{row.rowNumber}}
+          </button>
         </td>
       </tr>
       </tbody>
