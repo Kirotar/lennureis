@@ -8,7 +8,7 @@ const props = defineProps<{
 }>();
 const store = useFlightStore();
 
-const selectedSeats = ref<string[]>(store.assignedSeats);
+const selectedSeats = computed<string[]>(() => store.assignedSeats);
 
 const groupedSeats = computed<GroupedRow[]>(() => {
   const grouped: Record<number, Record<string, Seats>> = {};
@@ -37,13 +37,13 @@ function isSelected(seatRow: number, seatColumn: string) {
 
 function selectSeat(seatRow: number, seatColumn: string) {
   const seatId = `${seatRow}${seatColumn}`;
-  const alreadySelected = selectedSeats.value.indexOf(seatId);
+  const alreadySelected = store.assignedSeats.indexOf(seatId);
 
   if (alreadySelected !== -1) {
-    return selectedSeats.value.splice(alreadySelected, 1)
+    return store.assignedSeats.splice(alreadySelected, 1)
   } else {
-    if (selectedSeats.value.length < props.passengerCount) {
-      return selectedSeats.value.push(seatId);
+    if (store.assignedSeats.length < props.passengerCount) {
+      return store.assignedSeats.push(seatId);
     } else {
       alert("Uue istme valimiseks tühista eelnev iste.")
     }
