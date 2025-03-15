@@ -28,12 +28,11 @@ const groupedSeats = computed<GroupedRow[]>(() => {
 
 function isBooked(seat: any) {
   return seat && seat.booked === true;
-
 }
 
 function isSelected(seatRow: number, seatColumn: string) {
-  const seatId = `${seatColumn}${seatRow}`;
-  selectedSeats.value.includes(seatId);
+  const seatId = `${seatRow}${seatColumn}`;
+  return selectedSeats.value.includes(seatId);
 }
 
 onMounted(async () => {
@@ -75,7 +74,7 @@ onMounted(async () => {
                   :class="{'booked': isBooked(row[letter]),
                                   'selected': isSelected(row.rowNumber, letter),
 }">
-            {{ letter }} {{ row.rowNumber }}
+            {{ row.rowNumber }}{{ letter }}
           </button>
         </td>
         <td> {{ row.rowNumber }}
@@ -87,7 +86,7 @@ onMounted(async () => {
                                   'selected': isSelected(row.rowNumber, letter),
 }"
           >
-            {{ letter }} {{ row.rowNumber }}
+            {{ row.rowNumber }}{{ letter }}
           </button>
         </td>
       </tr>
@@ -101,5 +100,7 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-
+.selected{
+  color: green;
+}
 </style>
