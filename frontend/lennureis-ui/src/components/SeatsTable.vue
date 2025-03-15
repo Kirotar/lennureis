@@ -37,8 +37,11 @@ function isSelected(seatRow: number, seatColumn: string) {
 
 function selectSeat(seatRow: number, seatColumn: string) {
   const seatId = `${seatRow}${seatColumn}`;
-  if
-  return selectedSeats.value.push(seatId)
+  if(selectedSeats.value.length < props.passengerCount){
+  return selectedSeats.value.push(seatId);
+  } else {
+    alert("Uue istme valimiseks tühista eelnev iste.")
+  }
 }
 
 onMounted(async () => {
