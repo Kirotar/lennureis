@@ -56,7 +56,7 @@ onMounted(async () => {
 
 
     <router-link
-      :to="`/seats`"
+      :to="`/seats?flightId=${props.flightId}&passengerCount=${passengerCount}`"
       class="choose-seating-button"
       @click="store.getAssignedSeats(props.flightId, legroom, seatType, exitRow, parseInt(passengerCount))"
     >
