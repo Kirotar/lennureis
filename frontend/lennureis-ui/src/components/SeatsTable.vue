@@ -35,6 +35,12 @@ function isSelected(seatRow: number, seatColumn: string) {
   return selectedSeats.value.includes(seatId);
 }
 
+function selectSeat(seatRow: number, seatColumn: string) {
+  const seatId = `${seatRow}${seatColumn}`;
+  if
+  return selectedSeats.value.push(seatId)
+}
+
 onMounted(async () => {
   await store.getFlightById(props.flightId);
   await store.getSeats(props.flightId);
@@ -42,15 +48,6 @@ onMounted(async () => {
 </script>
 
 <template>
-  <!--  <div v-if="flight" class="flight-details">
-      <h3>Reservation Details</h3>
-      <p>From - To: {{ flight.origin }} - {{ flight.destination }}</p>
-      <p>Duration: {{ flight.departure }} - {{ flight.arrival }}</p>
-      <p>Company: {{ flight.company }}</p>
-      <p>Price: {{ flight.price }}</p>
-      <p>Number of passengers: {{ passengers }} </p>
-    </div>-->
-
   <p>Sinu istmed: {{ store.assignedSeats }}</p>
   <p>Reisjate arv: {{ passengerCount }}</p>
   <div class="plane-seats-container">
@@ -73,7 +70,8 @@ onMounted(async () => {
                   :disabled="isBooked(row[letter])"
                   :class="{'booked': isBooked(row[letter]),
                                   'selected': isSelected(row.rowNumber, letter),
-}">
+}"
+                  @click="selectSeat(row.rowNumber, letter)">
             {{ row.rowNumber }}{{ letter }}
           </button>
         </td>
@@ -85,7 +83,7 @@ onMounted(async () => {
                   :class="{'booked': isBooked(row[letter]),
                                   'selected': isSelected(row.rowNumber, letter),
 }"
-          >
+                  @click="selectSeat(row.rowNumber, letter)">
             {{ row.rowNumber }}{{ letter }}
           </button>
         </td>
@@ -100,7 +98,7 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-.selected{
+.selected {
   color: green;
 }
 </style>
