@@ -57,7 +57,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <p>Sinu istmed: {{ store.assignedSeats }}</p>
+  <p>Sinu istmed: {{ store.assignedSeats.join(' , ')}}</p>
   <p>Reisjate arv: {{ passengerCount }}</p>
   <div class="plane-seats-container">
     <table>
