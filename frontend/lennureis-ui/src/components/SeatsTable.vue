@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import {type Seats, useFlightStore} from "@/stores/flight.ts";
-import {ref, onMounted} from "vue";
-import type { Flight } from "@/stores/flight.ts";
+import {type GroupedRow, type Seats, useFlightStore} from "@/stores/flight.ts";
+import {ref, onMounted, computed} from "vue";
 
 const props = defineProps<{
   flightId: number
@@ -9,10 +8,26 @@ const props = defineProps<{
 }>();
 const store = useFlightStore();
 
-const flight = ref<Flight | null>(null);
-const seats = ref<Seats | null>(null);
+const groupedSeats = computed<GroupedRow[]>(() => {
+  const grouped: Record<number, Record<string, Seats>> = {};
 
+  store.seats.forEach((seat: Seats) => {
+    if (!grouped[seat.seatRow]) {
+      grouped[seat.seatRow] = {};
+    }
+    grouped[seat.seatRow][seat.seatColumn] = seat;
+  });
 
+  return Object.entries(grouped).map(([rowNumber, seats]) => ({
+    rowNumber: Number(rowNumber),
+    ...seats
+  }));
+});
+
+onMounted(async () => {
+  await store.getFlightById(props.flightId);
+  await store.getSeats(props.flightId);
+});
 </script>
 
 <template>
@@ -41,15 +56,28 @@ const seats = ref<Seats | null>(null);
       <tbody>
       <tr v-for="seat in store.seats" :key="seat.id">
 
-      <td><button>O</button></td>
-        <td><button>O</button></td>
-        <td><button>O</button></td>
-          <td>{{ seat.seatRow }}</td>
-        <td><button>O</button></td>
-        <td><button>O</button></td>
-        <td><button>O</button></td>
+        <td>
+          <button>O</button>
+        </td>
+        <td>
+          <button>O</button>
+        </td>
+        <td>
+          <button>O</button>
+        </td>
+        <td>{{ seat.seatRow }}</td>
+        <td>
+          <button>O</button>
+        </td>
+        <td>
+          <button>O</button>
+        </td>
+        <td>
+          <button>O</button>
+        </td>
       </tr>
-      </tbody>/
+      </tbody>
+      /
     </table>
 
   </div>

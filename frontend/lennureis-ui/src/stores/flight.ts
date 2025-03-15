@@ -23,10 +23,16 @@ export interface Seats {
   booked: boolean;
 }
 
+export interface GroupedRow {
+  rowNumber: number;
+  [column: string]: Seats | number;
+}
+
 export const useFlightStore = defineStore('flight', () => {
   const flights = ref<Flight[]>([])
   const seats = ref<Seats[]>([])
   const assignedSeats = ref<string[]>([])
+  const groupedRow = ref<GroupedRow[]>([])
 
   async function getFlights() {
     const response = await fetch(API_ENDPOINTS.FLIGHT_INFO)
@@ -90,6 +96,7 @@ export const useFlightStore = defineStore('flight', () => {
     flights,
     seats,
     assignedSeats,
+    groupedRow,
     getFlights,
     searchFlights,
     getFlightById,
