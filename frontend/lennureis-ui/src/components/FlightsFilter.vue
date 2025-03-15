@@ -69,8 +69,13 @@ onMounted(() => {
     </form>
   </div>
 
+
+
   <div class="flights-container">
-    <table  class="filtered-flights-table">
+    <div v-if="store.filteredFlights.length === 0" class="no-flights-message">
+    Ei leitud ühtegi lendu.  </div>
+
+    <table  v-else class="filtered-flights-table">
       <thead class="table-header">
       <tr>
         <th class="table-header-cell">Alguspunkt</th>
