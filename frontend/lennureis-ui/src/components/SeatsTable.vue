@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {type GroupedRow, type Seats, useFlightStore} from "@/stores/flight.ts";
+import {type GroupedRow, type Seats, useFlightStore} from "@/stores/flightStore.ts";
 import {ref, onMounted, computed} from "vue";
 
 const props = defineProps<{

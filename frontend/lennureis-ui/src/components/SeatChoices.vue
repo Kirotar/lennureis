@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
-import {type Flight, useFlightStore} from "@/stores/flight.ts";
+import {type FlightStore, useFlightStore} from "@/stores/flightStore.ts";
 
 const props = defineProps<{
   flightId: number
@@ -13,7 +13,7 @@ const seatType = ref<string>("");
 const legroom = ref<boolean>(false);
 const exitRow = ref<boolean>(false);
 
-const flight = ref<Flight | null>(null);
+const flight = ref<FlightStore | null>(null);
 
 onMounted(async () => {
   flight.value = await store.getFlightById(props.flightId);

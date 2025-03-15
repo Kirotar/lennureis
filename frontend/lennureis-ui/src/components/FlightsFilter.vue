@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {useFlightStore} from "@/stores/flight";
+import {useFlightStore} from "@/stores/flightStore.ts";
 import {onMounted, ref} from "vue";
 
 const store = useFlightStore();

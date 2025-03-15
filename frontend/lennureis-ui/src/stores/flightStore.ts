@@ -2,7 +2,7 @@ import {ref} from 'vue'
 import {defineStore} from 'pinia'
 import {API_ENDPOINTS} from "@/config.ts";
 
-export interface Flight {
+export interface FlightStore {
   id: number;
   origin: string;
   destination: string;
@@ -29,8 +29,8 @@ export interface GroupedRow {
 }
 
 export const useFlightStore = defineStore('flight', () => {
-  const flights = ref<Flight[]>([])
-  const filteredFlights = ref<Flight[]>([])
+  const flights = ref<FlightStore[]>([])
+  const filteredFlights = ref<FlightStore[]>([])
   const seats = ref<Seats[]>([])
   const assignedSeats = ref<string[]>([])
   const groupedRow = ref<GroupedRow[]>([])
@@ -64,14 +64,14 @@ export const useFlightStore = defineStore('flight', () => {
   }
 
   //AI used to add error handling
-  async function getFlightById(id: number): Promise<Flight | null> {
+  async function getFlightById(id: number): Promise<FlightStore | null> {
     try {
       const response = await fetch(`${API_ENDPOINTS.FLIGHT_SEARCH_ID}/${id}`);
       if (!response.ok) {
         console.error('Failed to fetch flight. Status:', response.status);
         return null;
       }
-      return await response.json() as Flight;
+      return await response.json() as FlightStore;
     } catch (error) {
       console.error('Error fetching flight:', error);
       return null;
@@ -80,7 +80,9 @@ export const useFlightStore = defineStore('flight', () => {
 
   async function getSeats(id: number) {
     const response = await fetch(`${API_ENDPOINTS.FLIGHT_GET_SEATS}/${id}`);
+
     const data = await response.json();
+    console.log("Fetched seats: ", data);
     seats.value = data;
   }
 
