@@ -93,7 +93,7 @@ onMounted(() => {
         <td class="table-data-cell">{{ flight.destination }}</td>
         <td class="table-data-cell">{{ flight.departure }}</td>
         <td class="table-data-cell">{{ flight.arrival }}</td>
-        <td class="table-data-cell">{{ flight.price }}</td>
+        <td class="table-data-cell">{{ flight.price }} €</td>
         <td class="table-data-cell">{{ flight.company }}</td>
         <td class="table-data-cell" data-label="Action">
 
