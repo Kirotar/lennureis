@@ -54,8 +54,7 @@ onMounted(async () => {
       </tr>
       </thead>
       <tbody>
-      <tr v-for="seat in store.seats" :key="seat.id">
-
+      <tr v-for="row in groupedSeats" :key="row.rowNumber">
         <td>
           <button>O</button>
         </td>
@@ -65,7 +64,8 @@ onMounted(async () => {
         <td>
           <button>O</button>
         </td>
-        <td>{{ seat.seatRow }}</td>
+        <td> {{ row.rowNumber }}
+        </td>
         <td>
           <button>O</button>
         </td>
@@ -77,7 +77,7 @@ onMounted(async () => {
         </td>
       </tr>
       </tbody>
-      /
+
     </table>
 
   </div>
