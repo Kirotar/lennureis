@@ -55,8 +55,10 @@ onMounted(async () => {
       </thead>
       <tbody>
       <tr v-for="row in groupedSeats" :key="row.rowNumber">
-        <td>
-          <button>O</button>
+        <td v-for="letter in ['A', 'B', 'C']" :key="letter">
+          <button v-if="letter">
+            {{letter}} {{row.rowNumber}}
+          </button>
         </td>
         <td>
           <button>O</button>
