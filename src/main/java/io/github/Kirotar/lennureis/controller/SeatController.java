@@ -27,4 +27,8 @@ public class SeatController {
         return seatService.assignSeats(seat);
     }
 
+    @PostMapping("/assign-taken-seats/{id}")
+    public void assignRandomSeatsById(@PathVariable("id") int id) {
+        seatService.assignRandomTakenSeats(id);
+    }
 }

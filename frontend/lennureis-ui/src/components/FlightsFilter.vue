@@ -100,6 +100,7 @@ onMounted(() => {
           <router-link
               :to="`/choices?flightId=${flight.id}`"
               class="make-booking-button"
+              @click="store.assignRandomSeats(flight.id)"
           >
             Make a reservation
           </router-link>

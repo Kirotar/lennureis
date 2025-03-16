@@ -57,7 +57,6 @@ public class SeatService {
 
 
     public List<String> assignSeats(SeatsRequest request) {
-        assignRandomTakenSeats(request.getFlightId());
         List<Seat> recommendedSeats = seatRepository.reccommendSeatIds(request.getFlightId(), request.getLegroom(), request.getSeatType(), request.getExitRow()
         );
         List<String> assignedSeats = new ArrayList<>();
