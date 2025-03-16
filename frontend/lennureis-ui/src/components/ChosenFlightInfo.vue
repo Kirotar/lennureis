@@ -18,7 +18,7 @@ onMounted(async () => {
 
 <template>
   <div v-if="flight" class="flight-details">
-    <h3>Sinu lend:</h3>
+    <h3>Sinu lennu info:</h3>
     <p>Alguspunkt - Sihtkoht: {{ flight.origin }} - {{ flight.destination }}</p>
     <p>Kestvus: {{ flight.departureDate }} {{ flight.departureTime }}- {{ flight.arrivalDate }}
       {{ flight.arrivalTime }}</p>

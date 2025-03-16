@@ -100,7 +100,11 @@ onMounted(async () => {
     </table>
 
   </div>
-
+  <router-link
+    :to="`/confirmation?flightId=${props.flightId}&passengerCount=${passengerCount}`"
+    class="confirm-booking-button"
+  >
+Kinnita istmekohad  </router-link>
 
 </template>
 
