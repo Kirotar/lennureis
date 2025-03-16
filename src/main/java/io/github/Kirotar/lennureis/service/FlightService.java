@@ -22,7 +22,7 @@ public class FlightService {
 
     public List<Flight> searchFlights(FlightSearch search) {
         return flightRepository.findAvailableFlightsWithFilters(search.getOrigin(), search.getDestination(),
-                search.getDeparture(), search.getArrival(), search.getCompany());
+                search.getDepartureDate(), search.getArrivalDate(), search.getCompany());
     }
 
     public Flight searchFlightById (int id){

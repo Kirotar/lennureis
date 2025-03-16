@@ -23,11 +23,17 @@ public class Flight {
     @Column(name = "destination", length = 50)
     private String destination;
 
-    @Column(name = "departure")
-    private String departure;
+    @Column(name = "departure_date")
+    private String departureDate;
 
-    @Column(name = "arrival")
-    private String arrival;
+    @Column(name = "departure_time")
+    private String departureTime;
+
+    @Column(name = "arrival_date")
+    private String arrivalDate;
+
+    @Column(name = "arrival_time")
+    private String arrivalTime;
 
     @Column(name = "price", precision = 10, scale = 2)
     private BigDecimal price;

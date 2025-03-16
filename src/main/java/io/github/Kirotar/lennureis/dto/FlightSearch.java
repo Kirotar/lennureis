@@ -17,14 +17,14 @@ public class FlightSearch {
         return "FlightSearch{" +
                 "origin='" + origin + '\'' +
                 ", destination='" + destination + '\'' +
-                ", departure='" + departure + '\'' +
-                ", arrival='" + arrival + '\'' +
+                ", departure='" + departureDate + '\'' +
+                ", arrival='" + arrivalDate + '\'' +
                 ", company='" + company + '\'' +
                 '}';
     }
     private String origin;
     private String destination;
-    private String departure;
-    private String  arrival;
+    private String departureDate;
+    private String arrivalDate;
     private String company;
 }

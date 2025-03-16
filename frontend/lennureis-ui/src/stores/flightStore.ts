@@ -6,8 +6,10 @@ export interface FlightStore {
     id: number;
     origin: string;
     destination: string;
-    departure: string;
-    arrival: string;
+    departureDate: string;
+    departureTime: string;
+    arrivalDate: string;
+    arrivalTime: string;
     price: number;
     company: string;
 }
@@ -44,16 +46,16 @@ export const useFlightStore = defineStore('flight', () => {
 
     async function searchFlights(origin: string,
                                  destination: string,
-                                 departure: string,
-                                 arrival: string,
+                                 departureDate: string,
+                                 arrivalDate: string,
                                  company: string) {
 
         const url = new URL(API_ENDPOINTS.FLIGHT_SEARCH, window.location.origin);
 
         if (origin) url.searchParams.append('origin', origin);
         if (destination) url.searchParams.append('destination', destination);
-        if (departure) url.searchParams.append('departure', departure);
-        if (arrival) url.searchParams.append('arrival', arrival);
+        if (departureDate) url.searchParams.append('departureDate', departureDate);
+        if (arrivalDate) url.searchParams.append('arrivalDate', arrivalDate);
         if (company) url.searchParams.append('company', company);
 
         const response = await fetch(url.toString());

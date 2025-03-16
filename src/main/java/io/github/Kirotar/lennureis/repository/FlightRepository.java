@@ -12,14 +12,14 @@ public interface FlightRepository extends JpaRepository<Flight, Integer> {
     @Query("SELECT f FROM Flight f WHERE " +
             "(:origin IS NULL OR :origin = '' OR f.origin = :origin) " +
             "AND (:destination IS NULL OR :destination = '' OR f.destination = :destination) " +
-            "AND (:departure IS NULL OR :departure = '' OR f.departure =:departure) " +
-            "AND (:arrival IS NULL OR :arrival = '' OR f.arrival =:arrival) " +
+            "AND (:departureDate IS NULL OR :departureDate = '' OR f.departureDate =:departureDate) " +
+            "AND (:arrivalDate IS NULL OR :arrivalDate = '' OR f.arrivalDate =:arrivalDate) " +
             "AND (:company IS NULL OR :company = '' OR f.company = :company)")
     List<Flight> findAvailableFlightsWithFilters(
             @Param("origin") String origin,
             @Param("destination") String destination,
-            @Param("departure") String departure,
-            @Param("arrival") String arrival,
+            @Param("departureDate") String departureDate,
+            @Param("arrivalDate") String arrivalDate,
             @Param("company") String company
     );
 }

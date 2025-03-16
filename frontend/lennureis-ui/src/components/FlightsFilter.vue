@@ -12,13 +12,24 @@ const selectedCompany = ref<string>("");
 const departureDate = ref<string>("");
 const arrivalDate = ref<string>("");
 
+//Tehisintellekti abi (formatDate):
+const formatDate = (dateString: string): string => {
+  if (!dateString) return "";
+  const date = new Date(dateString);
+  return date.toISOString().split('T')[0];
+};
+
+
 const handleSearch = () => {
+  const formattedDepartureDate = formatDate(departureDate.value);
+  const formattedArrivalDate = formatDate(arrivalDate.value);
+
   store.searchFlights(
-      selectedOrigin.value,
-      selectedDestination.value,
-      departureDate.value,
-      arrivalDate.value,
-      selectedCompany.value
+    selectedOrigin.value,
+    selectedDestination.value,
+    formattedDepartureDate,
+    formattedArrivalDate,
+    selectedCompany.value
   );
 };
 
@@ -91,8 +102,8 @@ onMounted(() => {
       <tr v-for="flight in store.filteredFlights" :key="flight.id">
         <td class="table-data-cell">{{ flight.origin }}</td>
         <td class="table-data-cell">{{ flight.destination }}</td>
-        <td class="table-data-cell">{{ flight.departure }}</td>
-        <td class="table-data-cell">{{ flight.arrival }}</td>
+        <td class="table-data-cell">{{ flight.departureDate }} {{ flight.departureTime }}</td>
+        <td class="table-data-cell">{{ flight.arrivalDate }} {{ flight.arrivalTime }}</td>
         <td class="table-data-cell">{{ flight.price }} €</td>
         <td class="table-data-cell">{{ flight.company }}</td>
         <td class="table-data-cell" data-label="Action">
