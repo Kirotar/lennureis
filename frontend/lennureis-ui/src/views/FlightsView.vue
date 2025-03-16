@@ -5,7 +5,16 @@ import FlightsFilter from "@/components/FlightsFilter.vue";
 
 <template>
   <main>
-    <h2>Leia omale sobiv reis:</h2>
+    <div class="header-container"><h2>Leia omale sobiv reis:</h2>
+    </div>
     <FlightsFilter/>
   </main>
 </template>
+
+<style scoped>
+.header-container{
+  justify-content: center;
+  display: flex;
+
+}
+</style>
