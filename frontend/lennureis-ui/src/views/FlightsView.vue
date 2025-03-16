@@ -15,6 +15,6 @@ import FlightsFilter from "@/components/FlightsFilter.vue";
 .header-container{
   justify-content: center;
   display: flex;
-
+color: darkslategray;
 }
 </style>

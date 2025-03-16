@@ -17,7 +17,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div v-if="flight" class="flight-details">
+  <div v-if="flight" class="flight-details-container">
     <h3>Sinu lennu info:</h3>
     <p>Alguspunkt - Sihtkoht: {{ flight.origin }} - {{ flight.destination }}</p>
     <p>Kestvus: {{ flight.departureDate }} {{ flight.departureTime }}- {{ flight.arrivalDate }}
@@ -30,5 +30,16 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-
+.flight-details-container {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  width: 90%;
+  max-width: 1200px;
+  margin: 1rem auto;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: darkslategray;
+  line-height: 0.8;
+}
 </style>

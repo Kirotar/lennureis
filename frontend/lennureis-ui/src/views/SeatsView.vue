@@ -26,5 +26,17 @@ const passengerCount = Number(route.query.passengerCount);
 </template>
 
 <style scoped>
+.back-button {
+  background-color: darkorange;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.back-button:hover {
+  background-color: orangered;
+}
 
 </style>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {type GroupedRow, type Seats, useFlightStore} from "@/stores/flightStore.ts";
-import { onMounted, computed} from "vue";
+import {onMounted, computed} from "vue";
 
 const props = defineProps<{
   flightId: number
@@ -58,58 +58,98 @@ onMounted(async () => {
 
 <template>
   <div class="plane-seats-container">
-    <table>
-      <thead>
-      <tr>
-        <th>A</th>
-        <th>B</th>
-        <th>C</th>
-        <th></th>
-        <th>D</th>
-        <th>E</th>
-        <th>F</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr v-for="row in groupedSeats" :key="row.rowNumber">
-        <td v-for="letter in ['A', 'B', 'C']" :key="letter">
-          <button v-if="letter"
-                  :disabled="isBooked(row[letter])"
-                  :class="{'booked': isBooked(row[letter]),
+    <div class="plane-container">
+      <table>
+        <thead>
+        <tr>
+          <th>A</th>
+          <th>B</th>
+          <th>C</th>
+          <th></th>
+          <th>D</th>
+          <th>E</th>
+          <th>F</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="row in groupedSeats" :key="row.rowNumber">
+          <td v-for="letter in ['A', 'B', 'C']" :key="letter">
+            <button v-if="letter"
+                    :disabled="isBooked(row[letter])"
+                    :class="{'booked': isBooked(row[letter]),
                                   'selected': isSelected(row.rowNumber, letter),
 }"
-                  @click="selectSeat(row.rowNumber, letter)">
-            {{ row.rowNumber }}{{ letter }}
-          </button>
-        </td>
-        <td> {{ row.rowNumber }}
-        </td>
-        <td v-for="letter in ['D', 'E', 'F']" :key="letter">
-          <button v-if="letter"
-                  :disabled="isBooked(row[letter])"
-                  :class="{'booked': isBooked(row[letter]),
+                    @click="selectSeat(row.rowNumber, letter)">
+              {{ row.rowNumber }}{{ letter }}
+            </button>
+          </td>
+          <td> {{ row.rowNumber }}
+          </td>
+          <td v-for="letter in ['D', 'E', 'F']" :key="letter">
+            <button v-if="letter"
+                    :disabled="isBooked(row[letter])"
+                    :class="{'booked': isBooked(row[letter]),
                                   'selected': isSelected(row.rowNumber, letter),
 }"
-                  @click="selectSeat(row.rowNumber, letter)">
-            {{ row.rowNumber }}{{ letter }}
-          </button>
-        </td>
-      </tr>
-      </tbody>
+                    @click="selectSeat(row.rowNumber, letter)">
+              {{ row.rowNumber }}{{ letter }}
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
 
-    </table>
-
+    </div>
+    </div>
+  <div class="confirmation-button-container">
+    <router-link
+      :to="`/confirmation?flightId=${props.flightId}&passengerCount=${passengerCount}`"
+      class="confirm-booking-button"
+    >
+      Kinnita istmekohad
+    </router-link>
   </div>
-  <router-link
-    :to="`/confirmation?flightId=${props.flightId}&passengerCount=${passengerCount}`"
-    class="confirm-booking-button"
-  >
-Kinnita istmekohad  </router-link>
-
 </template>
 
 <style scoped>
-.selected {
-  color: green;
+.plane-container {
+  background: dimgrey;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  margin: 1rem auto;
+  padding: 1.5rem;
+  width: fit-content;
+  color: white;
 }
+
+.selected {
+  background-color: darkseagreen;
+}
+
+button {
+  width: 40px;
+  height: 40px;
+  color: darkslategray;
+}
+
+.confirm-booking-button {
+  background-color: #32936f;
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.confirm-booking-button:hover {
+  background-color: #267356;
+}
+
+.confirmation-button-container{
+  justify-content: center;
+display: flex;
+}
+
 </style>

@@ -61,14 +61,14 @@ onMounted(() => {
     <button @click="isVisible = !isVisible">Otsi lende</button>
     <form v-if="isVisible" @submit.prevent="handleSearch">
       <select v-model="selectedOrigin" name="origin">
-        <option value="">Select Origin</option>
+        <option value="">Vali algpunkt</option>
         <option v-for="flight in store.flights" :key="flight.id" :value="flight.origin">
           {{ flight.origin }}
         </option>
       </select>
 
       <select v-model="selectedDestination" name="destination">
-        <option value="">Select Destination</option>
+        <option value="">Vali sihtkoht</option>
         <option v-for="flight in store.flights" :key="flight.id" :value="flight.destination">
           {{ flight.destination }}
         </option>
@@ -78,7 +78,7 @@ onMounted(() => {
       <input v-model="arrivalDate" type="date" id="arrival" name="arrival"><br><br>
 
       <select v-model="selectedCompany" name="company">
-        <option value="">Select Company</option>
+        <option value="">Vali teenusepakkuja</option>
         <option v-for="flight in store.flights" :key="flight.id" :value="flight.company">
           {{ flight.company }}
         </option>
@@ -127,7 +127,7 @@ onMounted(() => {
             class="make-booking-button"
             @click="store.assignRandomSeats(flight.id)"
           >
-            Make a reservation
+          Broneeri ja vali istmed
           </router-link>
         </td>
       </tr>

@@ -9,11 +9,16 @@ const passengerCount = Number(route.query.passengerCount);
 </script>
 
 <template>
-  <h2>Sinu broneering on kinnitatud!</h2>
+  <div class="header-container"><h2>Sinu broneering on kinnitatud!</h2></div>
+
   <ChosenFlightInfo :flightId="flightId" :passengerCount="passengerCount" :showSeats="true"
   ></ChosenFlightInfo>
 </template>
 
 <style scoped>
-
+.header-container{
+  justify-content: center;
+  display: flex;
+  color: darkslategray;
+}
 </style>
