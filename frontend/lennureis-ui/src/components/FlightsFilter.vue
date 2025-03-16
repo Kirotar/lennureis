@@ -19,7 +19,6 @@ const formatDate = (dateString: string): string => {
   return date.toISOString().split('T')[0];
 };
 
-
 const handleSearch = () => {
   const formattedDepartureDate = formatDate(departureDate.value);
   const formattedArrivalDate = formatDate(arrivalDate.value);
@@ -32,6 +31,15 @@ const handleSearch = () => {
     selectedCompany.value
   );
 };
+
+const priceSort = ref("");
+const sortByPrice = () => {
+  if (priceSort.value === "highest-to-lowest") {
+    store.filteredFlights.sort((a, b) => b.price - a.price);
+  } else if (priceSort.value === "lowest-to-highest") {
+    store.filteredFlights.sort((a, b) => a.price - b.price);
+  }
+}
 
 const resetFilters = () => {
   selectedOrigin.value = "";
@@ -48,7 +56,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div >
+  <div>
     <button @click="isVisible = !isVisible">Otsi lende</button>
     <form v-if="isVisible" @submit.prevent="handleSearch">
       <select v-model="selectedOrigin" name="origin">
@@ -80,13 +88,18 @@ onMounted(() => {
     </form>
   </div>
 
-
+  <select v-model="priceSort" @change="sortByPrice">
+    <option value="">Sorteeri hinna järgi</option>
+    <option value="highest-to-lowest"> Kallimad enne</option>
+    <option value="lowest-to-highest"> Odavamad enne</option>
+  </select>
 
   <div class="flights-container">
     <div v-if="store.filteredFlights.length === 0" class="no-flights-message">
-    Ei leitud ühtegi lendu.  </div>
+      Ei leitud ühtegi lendu.
+    </div>
 
-    <table  v-else class="filtered-flights-table">
+    <table v-else class="filtered-flights-table">
       <thead class="table-header">
       <tr>
         <th class="table-header-cell">Alguspunkt</th>
@@ -109,13 +122,14 @@ onMounted(() => {
         <td class="table-data-cell" data-label="Action">
 
           <router-link
-              :to="`/choices?flightId=${flight.id}`"
-              class="make-booking-button"
-              @click="store.assignRandomSeats(flight.id)"
+            :to="`/choices?flightId=${flight.id}`"
+            class="make-booking-button"
+            @click="store.assignRandomSeats(flight.id)"
           >
             Make a reservation
           </router-link>
-        </td>      </tr>
+        </td>
+      </tr>
       </tbody>
     </table>
   </div>
