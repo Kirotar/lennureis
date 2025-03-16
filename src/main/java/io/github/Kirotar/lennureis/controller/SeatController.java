@@ -1,7 +1,6 @@
 package io.github.Kirotar.lennureis.controller;
 
 import io.github.Kirotar.lennureis.dto.SeatsRequest;
-import io.github.Kirotar.lennureis.model.Seat;
 import io.github.Kirotar.lennureis.service.SeatService;
 import org.springframework.web.bind.annotation.*;
 

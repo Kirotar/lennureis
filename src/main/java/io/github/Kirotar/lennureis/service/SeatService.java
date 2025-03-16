@@ -5,7 +5,6 @@ import io.github.Kirotar.lennureis.model.Seat;
 import io.github.Kirotar.lennureis.repository.SeatRepository;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
