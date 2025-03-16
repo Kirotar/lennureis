@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {type GroupedRow, type Seats, useFlightStore} from "@/stores/flightStore.ts";
-import {ref, onMounted, computed} from "vue";
+import { onMounted, computed} from "vue";
 
 const props = defineProps<{
   flightId: number
@@ -57,8 +57,6 @@ onMounted(async () => {
 </script>
 
 <template>
-  <p>Sinu istmed: {{ store.assignedSeats.join(' , ')}}</p>
-  <p>Reisjate arv: {{ passengerCount }}</p>
   <div class="plane-seats-container">
     <table>
       <thead>

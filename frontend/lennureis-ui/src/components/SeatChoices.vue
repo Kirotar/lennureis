@@ -21,14 +21,6 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div v-if="flight" class="flight-details">
-    <h3>Sinu lend:</h3>
-    <p>Alguspunkt - Sihtkoht: {{ flight.origin }} - {{ flight.destination }}</p>
-    <p>Kestvus: {{ flight.departure }} - {{ flight.arrival }}</p>
-    <p>Teenusepakkuja: {{ flight.company }}</p>
-    <p>Hind: {{ flight.price }} €</p>
-  </div>
-
   <div class="seat-choices-container">
     <label for="passengers">Vali reisjate arv:</label>
 
