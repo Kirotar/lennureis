@@ -66,7 +66,7 @@ export const useFlightStore = defineStore('flight', () => {
         filteredFlights.value = [...flights.value];
     }
 
-    //AI used to add error handling
+    //Tehisintellekt aitas error handling lisada
     async function getFlightById(id: number): Promise<FlightStore | null> {
         try {
             const response = await fetch(`${API_ENDPOINTS.FLIGHT_SEARCH_ID}/${id}`);
